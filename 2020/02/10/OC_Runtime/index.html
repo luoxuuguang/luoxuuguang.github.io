@@ -20,28 +20,34 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="runtime相关问题1.介绍下runtime的内存模型  oc中有三种对象，实例对象(instance)，类对象（class），元类对象（meta-class）  instance包括指向class的isa指针;  class包括指向meta-class的isa指针，superclass指针，属性，对象方法，协议，成员变量等;  meta-class包括指向基类的meta-class的isa指针">
+<meta property="og:type" content="article">
+<meta property="og:title" content="runtime相关问题">
+<meta property="og:url" content="http://yoursite.com/2020/02/10/OC_Runtime/index.html">
 <meta property="og:site_name">
+<meta property="og:description" content="runtime相关问题1.介绍下runtime的内存模型  oc中有三种对象，实例对象(instance)，类对象（class），元类对象（meta-class）  instance包括指向class的isa指针;  class包括指向meta-class的isa指针，superclass指针，属性，对象方法，协议，成员变量等;  meta-class包括指向基类的meta-class的isa指针">
 <meta property="og:locale" content="cn">
+<meta property="article:published_time" content="2020-02-10T08:12:57.000Z">
+<meta property="article:modified_time" content="2020-03-28T14:37:27.737Z">
 <meta property="article:author" content="Luo Xuguang">
+<meta property="article:tag" content="OC">
+<meta property="article:tag" content="Runtime">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/">
+<link rel="canonical" href="http://yoursite.com/2020/02/10/OC_Runtime/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'cn'
   };
 </script>
 
-  <title></title>
+  <title>runtime相关问题 | </title>
   
 
 
@@ -141,80 +147,10 @@
             
 
   <div class="posts-expand">
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="cn">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/18/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Luo Xuguang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/18/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-03-18 17:39:29" itemprop="dateCreated datePublished" datetime="2020-03-18T17:39:29+08:00">2020-03-18</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
       
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
   
   
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="cn">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="cn">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/10/OC_Runtime/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -228,8 +164,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/10/OC_Runtime/" class="post-title-link" itemprop="url">runtime相关问题</a>
+          runtime相关问题
         </h1>
 
         <div class="post-meta">
@@ -269,7 +204,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="runtime相关问题"><a href="#runtime相关问题" class="headerlink" title="runtime相关问题"></a>runtime相关问题</h2><p>1.<strong>介绍下runtime的内存模型</strong><br>  oc中有三种对象，实例对象(instance)，类对象（class），元类对象（meta-class）<br>  instance包括指向class的isa指针;<br>  class包括指向meta-class的isa指针，superclass指针，属性，对象方法，协议，成员变量等;<br>  meta-class包括指向基类的meta-class的isa指针，superclass指针，类方法;</p>
+        <h2 id="runtime相关问题"><a href="#runtime相关问题" class="headerlink" title="runtime相关问题"></a>runtime相关问题</h2><p>1.<strong>介绍下runtime的内存模型</strong><br>  oc中有三种对象，实例对象(instance)，类对象（class），元类对象（meta-class）<br>  instance包括指向class的isa指针;<br>  class包括指向meta-class的isa指针，superclass指针，属性，对象方法，协议，成员变量等;<br>  meta-class包括指向基类的meta-class的isa指针，superclass指针，类方法;</p>
 <p>2.<strong>什么是isa指针?</strong><br>  Class类型的变量</p>
 <p>3.<strong>class_copyPropertyList与class_copyIvarList区别</strong><br>  lass_copyPropertyList返回的仅仅是对象类的属性(@property申明的属性)，而class_copyIvarList返回类的所有属性和变量</p>
 <p>4.<strong>class_rw_t 和 class_ro_t 的区别</strong><br>   他们都存放着当前类的属性、实例变量、方法、协议等等。区别在于：class_ro_t存放的是编译期间就确定的；而class_rw_t是在runtime时才确定，它会先将class_ro_t的内容拷贝过去，然后再将当前类的分类的这些属性、方法等拷贝到其中。所以可以说class_rw_t是class_ro_t的超集，当然实际访问类的方法、属性等也都是访问的class_rw_t中的内容</p>
@@ -282,24 +217,37 @@
 <p>  3、释放时，调用clearDeallocating函数。clearDeallocating函数首先根据对象地址获取所有weak指针地址的数组，然后遍历这个数组把其中的数据设为nil，最后把这个entry从weak表中删除，最后清理对象的记录。<br>  SideTable有三个成员{<br>      spinlock_t slock;           // 自旋锁，防止多线程访问冲突<br>      RefcountMap refcnts;        // 对象引用计数map<br>      weak_table_t weak_table;    // 对象弱引用map<br>  }</p>
 <p>8.<strong>AutoreleasePool的原理</strong><br>  每一个线程(包括主线程)都有一个NSAutoreleasePool栈. 当一个新的池子被创建的时候, push进栈. 当池子被释放内存时, pop出栈. 对象调用autorelease方法进入栈顶的池子中. 当线程结束的时候, 它会自动地销毁掉所有跟它有关联的池子.<br>  程序运行 -&gt; 开启事件循环 -&gt; 发生触摸事件 -&gt; 创建自动释放池 -&gt; 处理触摸事件 -&gt; 事件对象加入自动释放池 -&gt; 一次事件循环结束, 销毁自动释放池.<br>  在开始每一个事件循环之前系统会在主线程创建一个自动释放池, 并且在事件循环结束的时候把前面创建的释放池释放, 回收内存。</p>
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
+          <div class="post-tags">
+              <a href="/tags/OC/" rel="tag"># OC</a>
+              <a href="/tags/Runtime/" rel="tag"># Runtime</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/18/hello-world/" rel="next" title="Hello World">
+      Hello World <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
+    
   </article>
   
   
   
 
   </div>
-
-  
-
 
 
           </div>
@@ -350,6 +298,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#runtime相关问题"><span class="nav-number">1.</span> <span class="nav-text">runtime相关问题</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
